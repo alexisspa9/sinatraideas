@@ -42,7 +42,7 @@ end
 
 get '/myideas/new' do
     if logged_in?
-      erb :'myideas/create_idea'
+      erb :'ideas/create_idea'
     else
       redirect to '/login'
     end
@@ -73,7 +73,7 @@ get '/myideas/:id' do
     if logged_in?
       @idea = Idea.find_by_id(params[:id])
       if @idea && @idea.user === current_user
-      erb :'myideas/show_idea'
+      erb :'ideas/show_idea'
   		else
   			redirect to '/myideas'
   		end
@@ -87,7 +87,7 @@ get '/myideas/:id' do
     if logged_in?
       @idea = Idea.find_by_id(params[:id])
       if @idea && @idea.user === current_user
-      erb :'myideas/edit_idea'
+      erb :'ideas/edit_idea'
       else
         redirect to '/myideas'
       end

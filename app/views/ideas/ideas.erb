@@ -1,6 +1,8 @@
-<p> Here are your Ideas, <%= current_user.username %>
+<p> Here are your Ideas, <%= current_user.username %></p>
 <% current_user.ideas.each do |idea| %>
-  <div>
+  <div class="idea">
+  <a href="/myideas/<%= idea.id %>">
     <%= idea.keimeno %>
+  </a>
   </div>
 <% end %>

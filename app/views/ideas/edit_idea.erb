@@ -2,6 +2,6 @@
 
 <form method="post" action="/myideas/<%=@idea.id%>">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
-  <input type="text" name="keiemno" value="<%= @idea.keimeno %>">
+  <input type="text" name="keimeno" value="<%= @idea.keimeno %>">
   <input type="submit" value="submit">
 </form>
