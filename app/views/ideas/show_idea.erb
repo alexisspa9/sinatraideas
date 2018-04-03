@@ -1,0 +1,8 @@
+<p><%= @idea.keimeno %></p>
+
+<form method="post" action="/myideas/<%=@idea.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Idea">
+</form>
+
+<a href="/myideas/<%=@idea.id%>/edit">Edit Idea</a>

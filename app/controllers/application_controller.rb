@@ -33,7 +33,7 @@ helpers do
 
   get '/myideas' do
   if logged_in?
-    @ideas = Idea.where(id: => current_user.id)
+    @ideas = Idea.all
     erb :'ideas/ideas'
   else
     redirect to '/login'

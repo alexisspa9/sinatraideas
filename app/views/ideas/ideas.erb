@@ -1,0 +1,6 @@
+<p> Here are your Ideas, <%= @user.username %>
+<% @user.ideas.each do |idea| %>
+  <div>
+    <%= idea.keimeno %>
+  </div>
+<% end %>
