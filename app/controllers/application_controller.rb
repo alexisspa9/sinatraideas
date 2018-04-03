@@ -1,6 +1,7 @@
 
 require './config/environment'
 
+
 class ApplicationController < Sinatra::Base
 
 configure do
@@ -59,7 +60,7 @@ get '/myideas/new' do
         if @idea.save
           redirect to "/myideas/#{@idea.id}"
         else
-          redirect to "/myideas/new"
+          erb :'ideas/create_idea', locals: {message: "Content must not be blank"}
         end
       end
     else
@@ -154,9 +155,12 @@ get '/myideas/:id' do
      	
     else
       @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-      @user.save
+      if @user.save
       session[:user_id] = @user.id
       redirect to '/myideas'
+	  else
+	  	 erb :'users/create_user', locals: {message: "It seems that something went wrong, please make sure that the fields are not blank, the email has a correct form. If everything seems correct then username or email is already in use."}
+	  end
     end
   end
 
