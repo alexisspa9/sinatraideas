@@ -26,9 +26,48 @@ helpers do
 
 
 
-  
+
   get '/' do
     erb :index
+  end
+
+
+
+  get '/myideas' do
+  if logged_in?
+    @ideas = Idea.where(id: => current_user.id)
+    erb :'ideas/ideas'
+  else
+    redirect to '/login'
+  end
+end
+
+get '/myideas/new' do
+    if logged_in?
+      erb :'myideas/create_idea'
+    else
+      redirect to '/login'
+    end
+
+  end
+
+
+  post '/myideas' do
+    if logged_in?
+      if params[:keimeno] == ""
+        redirect to '/myideas/new'
+      else
+        @idea = current_user.ideas.build(keimeno: params[:keimeno])
+        if @idea.save
+          redirect to "/myideas/#{@idea.id}"
+        else
+          redirect to "/myideas/new"
+        end
+      end
+    else
+      redirect to '/login'
+    end
+
   end
 
 
