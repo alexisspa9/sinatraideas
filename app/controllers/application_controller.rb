@@ -21,14 +21,12 @@ helpers do
   end
 
 
-
-
-
-
-
-
   get '/' do
-    erb :index
+  	if logged_in?
+  	redirect to '/myideas'
+  	else
+    	erb :index
+	end
   end
 
 

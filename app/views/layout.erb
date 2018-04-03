@@ -1,1 +1,26 @@
-layout.erb
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sinatra Ideas</title>
+</head>
+<body>
+<nav>
+      <% if logged_in? %>
+
+        <a href="/myideas/new"> Write a new Idea </a>
+        <a href="/logout"> Log Out </a>
+        <p>Welcome, <%=current_user.username %></p>
+
+      <% else %>
+        <a href="/signup">Sign Up</a>
+        <a href="/login">Sign In</a>
+      <% end %>
+
+    </nav>
+    <div class="container">
+      <h1>Sinatra Ideas</h1>
+      <%= yield %>
+    </div>
+
+</body>
+</html>
