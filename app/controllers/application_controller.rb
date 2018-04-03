@@ -71,6 +71,70 @@ get '/myideas/new' do
   end
 
 
+get '/myideas/:id' do
+    if logged_in?
+      @idea = Idea.find_by_id(params[:id])
+      if @idea && @idea.user === current_user
+      erb :'myideas/show_idea'
+  		else
+  			redirect to '/myideas'
+  		end
+    else
+      redirect to 'login'
+    end
+  end
+
+
+  get '/myideas/:id/edit' do
+    if logged_in?
+      @idea = Idea.find_by_id(params[:id])
+      if @idea && @idea.user === current_user
+      erb :'myideas/edit_idea'
+      else
+        redirect to '/myideas'
+      end
+    else
+      redirect to '/login'
+    end
+  end
+
+
+
+  patch '/myideas/:id' do
+    if logged_in?
+      if params[:keimeno] == ""
+        redirect to "/myideas/#{params[:id]}/edit"
+      else
+        @idea = Idea.find_by_id(params[:id])
+        if @idea && @idea.user == current_user
+          if @idea.update(keimeno: params[:keimeno])
+            redirect to "/myideas/#{@idea.id}"
+          else
+            redirect to "/myideas/#{@idea.id}/edit"
+          end
+        else
+          redirect to '/myideas'
+        end
+      end
+    else
+      redirect to '/login'
+    end
+
+  end
+
+
+  delete '/myideas/:id/delete' do
+    if logged_in?
+      @idea = Idea.find_by_id(params[:id])
+      if @idea && @idea.user == current_user
+        @idea.delete
+      end
+      redirect to '/myideas'
+    else
+      redirect to '/login'
+    end
+  end
+
 
 
 
