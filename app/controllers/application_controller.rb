@@ -149,10 +149,10 @@ get '/myideas/:id' do
   end
 
   post '/signup' do
-    if params[:name] == "" || params[:email] == "" || params[:password] == ""
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect to '/signup'
     else
-      @user = User.new(:name => params[:name], :email => params[:email], :password => params[:password])
+      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
       @user.save
       session[:user_id] = @user.id
       redirect to '/myideas'
@@ -168,7 +168,7 @@ get '/myideas/:id' do
   end
 
   post '/login' do
-    user = User.find_by(:name => params[:name])
+    user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect "/myideas"

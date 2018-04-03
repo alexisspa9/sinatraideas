@@ -1,5 +1,5 @@
-<p> Here are your Ideas, <%= @user.username %>
-<% @user.ideas.each do |idea| %>
+<p> Here are your Ideas, <%= current_user.username %>
+<% current_user.ideas.each do |idea| %>
   <div>
     <%= idea.keimeno %>
   </div>
